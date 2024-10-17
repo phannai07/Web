@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siek Sophannai - Car Booking</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Draw a Rectangle and Circle</h1>
+
+    <!-- Canvas Element -->
+    <canvas id="myCanvas" width="400" height="400"></canvas>
+
+    <script>
+       
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Draw a rectangle
+        ctx.fillStyle = 'blue'; 
+        ctx.fillRect(50, 50, 150, 100); 
+
+        // Draw a circle
+        ctx.beginPath();
+        ctx.arc(250, 200, 75, 0, 2 * Math.PI); 
+        ctx.fillStyle = 'green'; 
+        ctx.fill();
+        ctx.stroke(); 
+    </script>
+</body>
+</html>
