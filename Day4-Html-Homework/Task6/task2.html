@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline Webpage Example</title>
+    <style>
+        body {
+			background-image: url(https://wallpapers.com/images/hd/dark-night-with-purple-sky-gdure9czoowwklb2.jpg);
+			background-size: cover;
+			background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+			color: white;
+			font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        h1 {
+            margin-bottom: 20px;
+			font-size: 60px;
+        }
+        p {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Offline Webpage</h1>
+    <p>This webpage is available offline thanks to a Service Worker!</p>
+	
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                }, function(err) {
+                    console.log('Service Worker registration failed:', err);
+                });
+            });
+        }
+    </script>
+</body>
+</html>

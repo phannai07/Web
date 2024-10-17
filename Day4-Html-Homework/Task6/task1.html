@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Color Selector</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .color-button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+            color: white;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Select Your Theme Color</h1>
+    
+    <button class="color-button" style="background-color: #f44336;" onclick="setThemeColor('#f44336')">Red</button>
+    <button class="color-button" style="background-color: #4CAF50;" onclick="setThemeColor('#4CAF50')">Green</button>
+    <button class="color-button" style="background-color: #2196F3;" onclick="setThemeColor('#2196F3')">Blue</button>
+    <button class="color-button" style="background-color: #FFEB3B; color: black;" onclick="setThemeColor('#FFEB3B')">Yellow</button>
+
+    <script>
+        function setThemeColor(color) {
+            document.body.style.backgroundColor = color;
+            localStorage.setItem('themeColor', color);
+        }
+
+        function applyStoredTheme() {
+            const storedColor = localStorage.getItem('themeColor');
+            if (storedColor) {
+                document.body.style.backgroundColor = storedColor;
+            }
+        }
+		
+        window.onload = applyStoredTheme;
+    </script>
+
+</body>
+</html>

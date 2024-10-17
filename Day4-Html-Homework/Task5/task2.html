@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geolocation Example</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        #location {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 300px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Find Your Current Location</h1>
+    <button onclick="getLocation()">Show My Location</button>
+    <div id="location">Click the button to display your location.</div>
+
+    <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError, { enableHighAccuracy: true });
+            } else {
+                document.getElementById('location').innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            const locationDiv = document.getElementById('location');
+            
+            // Display user's coordinates
+            locationDiv.innerHTML = `Latitude: ${latitude}<br>Longitude: ${longitude}`;
+
+            // Create a link to show the location on Google Maps
+            const mapLink = document.createElement('a');
+            mapLink.href = `https://www.google.com/maps?q=${latitude},${longitude}`;
+            mapLink.textContent = "View on Google Maps";
+            mapLink.target = "_blank";
+            mapLink.style.display = "block";
+            mapLink.style.marginTop = "10px";
+
+            locationDiv.appendChild(mapLink);
+        }
+
+        function showError(error) {
+            let errorMessage = "";
+
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    errorMessage = "User denied the request for Geolocation.";
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    errorMessage = "Location information is unavailable.";
+                    break;
+                case error.TIMEOUT:
+                    errorMessage = "The request to get user location timed out.";
+                    break;
+                case error.UNKNOWN_ERROR:
+                    errorMessage = "An unknown error occurred.";
+                    break;
+            }
+
+            document.getElementById('location').innerHTML = errorMessage;
+        }
+    </script>
+</body>
+</html>
